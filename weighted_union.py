@@ -42,13 +42,16 @@ class WeightedUnion:
         """Finds a root of _p and returns it.
         Find root is equal to find recursively parent of i,
         which doesn't have a parent"""
+        # creating a short-named reference to our __components
+        # in order to decrease amount of code
+        comp = self.__components
 
-        while _p != self.__components[_p]:
+        while _p != comp[_p]:
             """Compressing path to the root by flatting tree of nodes.
             In ideal case (when all nodes are in one union),
             all nodes will have one parent - root"""
-            self.__components[_p] = self.__components[self.__components[_p]]
-            _p = self.__components[_p]
+            comp[_p] = comp[comp[_p]]
+            _p = comp[_p]
         return _p
 
     def print_list(self):
